@@ -55,16 +55,6 @@ struct singleLinkedList {
 };
 typedef struct singleLinkedList mySlist;
 
-mySlist* generateList(unsigned int listNum){
-	mySlist *list = (mySlist*) malloc(sizeof(mySlist)*listNum);
-	char prefix[10] = "name_";
-	for(int x=0; x< listNum; x++){
-		//strcpy((list+x)->name, prefix);
-		sprintf((list+x)->name, "%s%d", prefix, x+1);
-		printf("list[%d].name=%s\n", x, (list+x)->name);
-	}
-}
-
 void addList(mySlist** list){
 	char prefix[10] = "name_";
 	if(*list == NULL){
