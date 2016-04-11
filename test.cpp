@@ -48,6 +48,105 @@ void variableSize(void){
     printf("pointer size(ptr): %d bytes.\n", sizeof(ptr));
 }
 
+#if 1
+struct singleLinkedList {
+	char name[20];
+	struct singleLinkedList *next;
+};
+typedef struct singleLinkedList mySlist;
+
+mySlist* generateList(unsigned int listNum){
+	mySlist *list = (mySlist*) malloc(sizeof(mySlist)*listNum);
+	char prefix[10] = "name_";
+	for(int x=0; x< listNum; x++){
+		//strcpy((list+x)->name, prefix);
+		sprintf((list+x)->name, "%s%d", prefix, x+1);
+		printf("list[%d].name=%s\n", x, (list+x)->name);
+	}
+}
+
+void addList(mySlist** list){
+	char prefix[10] = "name_";
+	if(*list == NULL){
+		/* the first entry of list */
+		*list = (mySlist*) malloc(sizeof(mySlist));
+		// init linked list
+                sprintf( (*list)->name, "%s1", prefix);
+		(*list)->next = NULL;
+	}else{
+		//find the last entry
+		mySlist *tmp=NULL;
+		int count=0;
+		for(tmp = *list; tmp != NULL; tmp = tmp->next){
+			++count;
+			if(tmp->next == NULL)
+				break;
+		}
+		
+		tmp->next = (mySlist*) malloc(sizeof(mySlist));
+                sprintf( (tmp->next)->name, "%s%d", prefix, count+1);
+                (tmp->next)->next = NULL;
+	}
+}
+
+void dumplist(mySlist *list){
+	mySlist *tmp = list;
+	int count=0;
+	for(;tmp != NULL; tmp=tmp->next){
+		printf("Entry[%d]:%s\n", ++count, tmp->name);
+	}
+}
+
+void purchList(mySlist** list){
+	mySlist *tmp=NULL;
+	for(;(*list) != NULL;){
+		tmp = (*list);
+		(*list) = (*list)->next;
+		printf("free %s.\n", tmp->name);
+		free(tmp);
+	}
+}
+
+void invertList(mySlist** list){
+	mySlist *cur=NULL;
+	mySlist *pre=NULL;
+        if((*list) == NULL){
+		printf("it's NULL list, return.\n");
+                return;
+	}
+
+	printf("invert list start\n");
+	cur = (*list);
+	while(cur != NULL){
+		cur = cur->next;
+		(*list)->next = pre;
+		pre=(*list);
+		if(cur != NULL)
+			(*list)=cur;
+	}
+	printf("invert finish.\n");
+}
+
+void invertSinglelist(void){
+	mySlist* head=NULL;
+	unsigned int number=0;
+	printf("Initial single linked list, Enter list number(must large than 0):");
+	scanf("%d", &number);
+	for(int x=0; x<number; x++)
+		addList(&head);
+
+	dumplist(head);
+
+	/* invert single linked list */
+	invertList(&head);	
+	dumplist(head);
+
+	purchList(&head);
+	dumplist(head);
+	return;
+}
+#endif
+
 /***********************************************************************************/
 
 struct testCase {
@@ -59,6 +158,7 @@ struct testCase {
 struct testCase testCases[] = {
   {0, "Reverse String Case.", invertString},
   {1, "size of variables.", variableSize},
+  {2, "Invert Single linked list.", invertSinglelist},
   {-1, "the last item for test code.", NULL},
 };
 
