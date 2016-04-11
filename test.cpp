@@ -202,6 +202,26 @@ void oper(void)
 }
 #endif
 
+#if 1
+unsigned int fibonacci(unsigned int x){
+
+	if(x==0)
+		return 0;
+	else if(x==1)
+		return 1;
+	else
+		return fibonacci(x-2) + fibonacci(x-1);
+
+}
+void fibSeries(void){
+	printf("Enter the Nth of Fibonacci Series:");
+	unsigned int x=0;
+	scanf("%d", &x);
+
+	printf("F%d=%d\n", x, fibonacci(x));
+}
+#endif
+
 /***********************************************************************************/
 
 struct testCase {
@@ -217,6 +237,7 @@ struct testCase testCases[] = {
   {3, "Invert Single linked list.", invertSinglelist},
   {4, "Sort a list of number.", bubbleSort},
   {5, "Operater sample.", oper},
+  {6, "Fibonacci series.", fibSeries},
   {-1, "the last item for test code.", NULL},
 };
 
