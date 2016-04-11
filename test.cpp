@@ -100,10 +100,6 @@ void purchList(mySlist** list){
 void invertList(mySlist** list){
 	mySlist *cur=NULL;
 	mySlist *pre=NULL;
-        if((*list) == NULL){
-		printf("it's NULL list, return.\n");
-                return;
-	}
 
 	printf("invert list start\n");
 	cur = (*list);
@@ -137,6 +133,37 @@ void invertSinglelist(void){
 }
 #endif
 
+#if 1
+void bubbleSort(void){
+	char input[]={20, 1, 58, 44,100, 2, 15, 20, 100, 512};
+	int i,j,tmp;
+
+        printf("before: {");
+        for(i=0; i<sizeof(input); i++)
+                printf(" %d,", input[i]);
+
+        printf("}\n");
+
+
+	for(i=0; i<sizeof(input); i++){
+		for(j=0; j<(sizeof(input)-1-i); j++){
+			if(input[j] > input[j+1]){
+				/* exchange the number */
+				tmp=input[j];
+				input[j]=input[j+1];
+				input[j+1]=tmp;
+			}
+		}
+	}
+
+	printf("after: {");
+	for(i=0; i<sizeof(input); i++)
+		printf(" %d,", input[i]);
+
+	printf("}\n");
+}
+#endif
+
 /***********************************************************************************/
 
 struct testCase {
@@ -149,6 +176,7 @@ struct testCase testCases[] = {
   {0, "Reverse String Case.", invertString},
   {1, "size of variables.", variableSize},
   {2, "Invert Single linked list.", invertSinglelist},
+  {3, "sort a list of number.", bubbleSort},
   {-1, "the last item for test code.", NULL},
 };
 
