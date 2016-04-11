@@ -161,6 +161,29 @@ void bubbleSort(void){
 		printf(" %d,", input[i]);
 
 	printf("}\n");
+
+	return;
+}
+#endif
+
+#if 1
+void oper(void)
+
+{
+
+    unsigned int x=0,y=0;
+    printf("Enter a unsigned inteter(x):");
+    scanf("%d,", &x);     
+    printf("Enter a unsigned inteter(y):");
+    scanf("%d,", &y);
+
+    printf("x&y=%d\n",x&y);
+    printf("x|y=%d\n",x|y);
+    printf("x^y=%d\n",x^y);
+    printf("x&&y=%d\n",x&&y);
+    printf("x||y=%d\n",x||y);        
+    printf("x<<y=%d\n",x<<y);
+    printf("x>>y=%d\n\n",x>>y);
 }
 #endif
 
@@ -173,10 +196,12 @@ struct testCase {
 };
 
 struct testCase testCases[] = {
-  {0, "Reverse String Case.", invertString},
-  {1, "size of variables.", variableSize},
-  {2, "Invert Single linked list.", invertSinglelist},
-  {3, "sort a list of number.", bubbleSort},
+  {0, "Finish Test program.", NULL},
+  {1, "Reverse String Case.", invertString},
+  {2, "Size of variables.", variableSize},
+  {3, "Invert Single linked list.", invertSinglelist},
+  {4, "Sort a list of number.", bubbleSort},
+  {5, "Operater sample.", oper},
   {-1, "the last item for test code.", NULL},
 };
 
@@ -200,6 +225,10 @@ int main(int argc, char** argv)
         help();
         scanf("%d", &example);
         
+	if(example == 0){
+		printf("finish program......\n");
+		goto stop;
+	}
         for(x=testCases; x->id >= 0; x++){
          if(x->id == example && x->function != NULL){
            functionStart();
@@ -210,6 +239,7 @@ int main(int argc, char** argv)
         } 
     }  
 
+stop:
     return 1;
 }
 
