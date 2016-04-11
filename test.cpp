@@ -167,23 +167,38 @@ void bubbleSort(void){
 #endif
 
 #if 1
-void oper(void)
-
+void dec2bin(int c)
 {
+   int i = 0;
+   for(i = 31; i >= 0; i--){
+     if((c & (1 << i)) != 0){
+       printf("1");
+     }else{
+       printf("0");
+     } 
+   }
+   printf("\n");
+}
 
-    unsigned int x=0,y=0;
-    printf("Enter a unsigned inteter(x):");
-    scanf("%d,", &x);     
-    printf("Enter a unsigned inteter(y):");
-    scanf("%d,", &y);
+void oper(void)
+{
+	unsigned int x=0,y=0;
+	printf("Enter a unsigned inteter(x):");
+	scanf("%d,", &x);
+	dec2bin(x);
+	printf("Enter a unsigned inteter(y):");
+	scanf("%d,", &y);
+	dec2bin(y);
 
-    printf("x&y=%d\n",x&y);
-    printf("x|y=%d\n",x|y);
-    printf("x^y=%d\n",x^y);
-    printf("x&&y=%d\n",x&&y);
-    printf("x||y=%d\n",x||y);        
-    printf("x<<y=%d\n",x<<y);
-    printf("x>>y=%d\n\n",x>>y);
+	printf("x&y=%d\n",x&y);
+	printf("x|y=%d\n",x|y);
+	printf("x^y=%d\n",x^y);
+	printf("x&&y=%d\n",x&&y);
+	printf("x||y=%d\n",x||y);        
+	printf("x<<y=%d\n",x<<y);
+	printf("x>>y=%d\n",x>>y);
+	printf("y<<x=%d\n",y<<x);
+	printf("y>>x=%d\n",y>>x);
 }
 #endif
 
