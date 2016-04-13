@@ -222,6 +222,25 @@ void fibSeries(void){
 }
 #endif
 
+#if 1
+void arrayAndPointer(void){
+
+	int i[6]={10,20,30,40,50,60};
+	int *ptr= (i+2);
+	
+	printf("Example:\n");
+	printf("int i[6]={10,20,30,40,50,60};\n");
+	printf("int *ptr=(i+2)\n\n");
+
+	printf("Question:\n");
+	printf("ptr[0]=%d\n", ptr[0]);
+	printf("*(ptr+1)=%d\n", *(ptr+1));
+	printf("*(i+1)=%d\n", *(i+1));
+	printf("ptr[-1]=%d\n", ptr[-1]);
+	return;
+} 
+#endif
+
 /***********************************************************************************/
 
 struct testCase {
@@ -238,6 +257,7 @@ struct testCase testCases[] = {
   {4, "Sort a list of number.", bubbleSort},
   {5, "Operater sample.", oper},
   {6, "Fibonacci series.", fibSeries},
+  {7, "array vs pointer operator.", arrayAndPointer},
   {-1, "the last item for test code.", NULL},
 };
 
