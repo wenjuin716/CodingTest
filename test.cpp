@@ -230,13 +230,24 @@ void arrayAndPointer(void){
 	
 	printf("Example:\n");
 	printf("int i[6]={10,20,30,40,50,60};\n");
-	printf("int *ptr=(i+2)\n\n");
+	printf("int *ptr=(i+2)\n");
 
 	printf("Question:\n");
 	printf("ptr[0]=%d\n", ptr[0]);
 	printf("*(ptr+1)=%d\n", *(ptr+1));
 	printf("*(i+1)=%d\n", *(i+1));
 	printf("ptr[-1]=%d\n", ptr[-1]);
+	printf("\nlevel 2 Question:\n");
+	int *ptr1=(int *) 0x444444;
+	char *ptr2=(char *) 0x111111;
+	printf("int *ptr1=(int *) 0x444444;\n");
+	printf("char *ptr2=(char *) 0x111111\n");
+	printf("ptr1=%x\n", ptr1);
+	printf("ptr2=%x\n", ptr2);
+	ptr1 += 0x5;
+	ptr2 += 0x5;
+	printf("ptr1+=0x5;\nptr1=%x\n",ptr1);
+	printf("ptr2+=0x5;\nptr2=%x\n",ptr2);
 	return;
 } 
 #endif
