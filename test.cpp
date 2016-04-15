@@ -251,6 +251,49 @@ void arrayAndPointer(void){
 } 
 #endif
 
+#if 1
+#define MAX 4
+bool setBitmap(int* bitmap,unsigned int offset){
+	int index=0;
+	
+	if(NULL == bitmap || offset >= (sizeof(int)*MAX*8)){
+		printf("Error: bitmap is NULL or offset is over bitmap size\n\n\n");
+		return false;
+	}
+
+	for(index=0; index<MAX;index++){
+		if(offset < ((index+1)*sizeof(int)*8)){
+			bitmap[index] |= (1 << offset);
+			break;
+		}
+	}
+
+	return true;
+}
+void bitmapPractice(void){
+	int bitmap[MAX]={0};
+	int offset=0;
+	int index=0;
+	
+	printf("Original Bitmap:\n");
+	for(index=0; index < MAX; index++){
+		printf("bitmap[%d]=", index);
+		dec2bin(bitmap[index]);
+	}
+
+	printf("Enter the offset:");
+	scanf("%d", &offset);
+
+        if(setBitmap(bitmap, offset)){
+		printf("After setBitmap:\n");
+        	for(index=0; index < MAX; index++){
+        	        printf("bitmap[%d]=", index);
+        	        dec2bin(bitmap[index]);
+        	}
+	}
+}
+#endif
+
 /***********************************************************************************/
 
 struct testCase {
@@ -268,6 +311,7 @@ struct testCase testCases[] = {
   {5, "Operater sample.", oper},
   {6, "Fibonacci series.", fibSeries},
   {7, "array vs pointer operator.", arrayAndPointer},
+  {8, "bitmap and offset pratice.", bitmapPractice},
   {-1, "the last item for test code.", NULL},
 };
 
