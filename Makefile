@@ -2,13 +2,13 @@ DIR=$(shell pwd)
 
 CC=gcc
 CFLAGS=
-OBJS=test.o
+OBJS=
 EXE=TestProgram
 
-all: test
+all: main.o
 
-test:$(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(EXE)
+main.o:
+	$(CC) main.c $(OBJS) $(CFLAGS) -o $(EXE)
 
 clean:
-	rm -rf $(OBJS) $(EXE)
+	rm -rf *.o $(EXE)
