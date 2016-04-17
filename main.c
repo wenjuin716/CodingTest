@@ -1,5 +1,5 @@
 #include "common.h"
-#include "ipc.h"
+#include "myipc.h"
 
 void help(myCase *Cases)
 {
@@ -299,8 +299,10 @@ void bitmapPractice(void){
 #if 1
 myCase ipcCases[]={
   {0, "Finish Test program.", NULL},
-  {1, "AF_UNIX Socket Server", socket_server},
-  {2, "AF_UNIX Socket Client", socket_client},
+  {1, "AF_UNIX Socket Server", socket_server},	/* UNIX Socket */
+  {2, "AF_UNIX Socket Client", socket_client},	/* UNIX Socket */
+  {3, "share memory Server.", shareMem_Server},	/* share Memory Server, create SHM */
+  {4, "share memory Client.", shareMem_Client},	/* share Memory Client, associate SHM */
   {-1, "the last item for IPC_practice function.", NULL},
 };
 

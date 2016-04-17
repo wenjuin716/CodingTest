@@ -2,7 +2,7 @@ DIR=$(shell pwd)
 
 CC=gcc
 CFLAGS=
-OBJS=ipc.o
+OBJS=myipc.o
 EXE=TestProgram
 
 all: main.o
@@ -10,8 +10,8 @@ all: main.o
 main.o: $(OBJS)
 	$(CC) main.c $(OBJS) $(CFLAGS) -o $(EXE)
 
-ipc.o:
-	$(CC) -c ipc.c
+myipc.o:
+	$(CC) -c myipc.c
 
 clean:
 	rm -rf *.o $(EXE)
