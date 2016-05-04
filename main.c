@@ -1,6 +1,6 @@
 #include "common.h"
 #include "myipc.h"
-
+#include <termios.h>
 void help(myCase *Cases)
 {
      myCase *x=Cases;
@@ -341,6 +341,114 @@ stop:
 }
 #endif
 
+#if 1
+void grawTower(char value, char level){
+
+	char index;
+	for(index=1;index <= ((level*2)-1); index++){
+		if(index <= (level-value))
+			printf(" ");
+		else if(index <= (level-value)+(value*2)-1)
+			printf("*");
+		else
+			printf(" ");
+	}
+
+	return;
+}
+void showAllTower(char* t1, char* t2, char* t3, unsigned int level){
+	/*	if level=3,
+	**	T1
+	**	  * 	(1*2)-1 	
+	**	 *** 	(2*2)-1
+	**	*****	(3*2)-1
+	**
+	**	So that, (value*2)-1 is the number of '*'
+	*/
+
+	const int max=(level*2)-1;
+	int index=0;
+	for(index=0; index < level; index++){
+		grawTower(t1[index], level);
+		printf(" ");
+		grawTower(t2[index], level);
+		printf(" ");
+		grawTower(t3[index], level);
+		printf("\n");
+	}
+}
+void game_init(char* t1, char* t2, char* t3, unsigned int level){
+	int index=0;
+
+	for(index=0; index < level; index++){
+		/*	all items push to tower1
+		**	and array should be the format,
+		**	t1[0]=1,t1[1]=2,t1[2]=3,.....t1[level-1]=level
+		*/
+		t1[index]=index+1;
+		t2[index]=0;
+		t3[index]=0;
+	}
+
+	showAllTower(t1, t2, t3, level);
+	return;
+}
+
+int isFinish(char* t3,unsigned int level){
+	int ret=TRUE;
+	int index=0;
+
+	while(index<level){
+		if(t3[index] != index+1){
+			ret=FALSE;
+			break;
+		}
+
+		index++;
+	}
+	
+	return ret;
+}
+
+void Hanoi(void){
+	unsigned char index1, index2, index3;	//the tower current index
+	unsigned int level=0;
+	unsigned int step=0;
+	char* tower1=NULL;
+	char* tower2=NULL;
+	char* tower3=NULL;	
+
+	char key;	//player input
+
+	printf("input the Game Level:");
+	scanf("%d", &level);
+
+	printf("Game Start, level=%d\n", level);
+	printf("Hint: you need move all Tower1's itmes to Tower3, and lower item should not less then upper item.\n");
+
+	tower1 = (char*)malloc(level);
+	tower2 = (char*)malloc(level);
+	tower3 = (char*)malloc(level);	
+
+	game_init(tower1, tower2, tower3, level);
+
+	while(!isFinish(tower3, level)){
+				
+		key=getchar();
+		printf("%x\n", key);
+
+		//show Hanoi 
+		showAllTower(tower1, tower2, tower3, level);
+	}		
+
+
+	free(tower1);
+	free(tower2);
+	free(tower3);
+	return;
+}
+#endif
+
 /***********************************************************************************/
 myCase testCases[] = {
   {0, "Finish Test program.", NULL},
@@ -353,6 +461,7 @@ myCase testCases[] = {
   {7, "array vs pointer operator.", arrayAndPointer},
   {8, "bitmap and offset pratice.", bitmapPractice},
   {9, "IPC practice.", ipc_practice},
+  {10, "Tower of Hanoi Game.", Hanoi},
   {-1, "the last item for test code.", NULL},
 };
 
