@@ -11,8 +11,7 @@ typedef struct testCase {
       void (*function)();
 } myCase;
 
-struct singleLinkedList {
+typedef struct singleLinkedList {
         char name[20];
         struct singleLinkedList *next;
-};
-typedef struct singleLinkedList mySlist;
+} mySlist;
