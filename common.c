@@ -1,5 +1,60 @@
 #include "common.h"
 
+/************************************************************************************/
+//myCase common function
+void myCasehelp(myCase *Cases)
+{
+	myCase *tmp=Cases;
+	printf("##################Case Help ###################\n");
+	for(; tmp->id >= 0; tmp++){
+		printf("  %d : %s\n",tmp->id, tmp->help);
+	}
+	printf("###############################################\n");
+
+	return;
+}
+
+int callFunction(myCase *Cases,int id){
+	int ret=FALSE;
+	myCase *tmp=NULL;
+	for(tmp = Cases; tmp->id >= 0; tmp++){
+		if(id == tmp->id){
+			printf("  %d : %s\n",tmp->id, tmp->help);
+			ret=TRUE;
+			functionStart();
+			tmp->function();
+			functionStop();
+			break;
+		}
+	}	
+
+	return ret;
+}
+
+/************************************************************************************/
+//myGroup common function
+void dumpGroup(myGroup *group){
+	myGroup *tmp = group;
+	printf("################ Group Info ###################\n");
+	for(tmp = group; tmp->cases != NULL; tmp++){
+		printf("[%d]%s : %s\n", tmp->id, tmp->name, tmp->descript);
+	}
+	printf("###############################################\n");
+}
+
+myCase* getCases(myGroup *group,int id){
+	myGroup *tmp=NULL;
+	for(tmp = group; tmp->cases != NULL; tmp++){
+		if(id == tmp->id){
+			break;
+		}
+	}	
+
+	return tmp->cases;
+}
+
+/************************************************************************************/
+//mySlist common function
 void addList(mySlist** list, char *name, char *descript){
 	if(*list == NULL){
 		/* the first entry of list */
@@ -46,3 +101,15 @@ void purchList(mySlist** list){
 		free(tmp);
 	}
 }
+
+
+/************************************************************************************/
+//other help common function
+void functionStart(void){
+     printf("\n\n***********function start*****************\n");
+}
+
+void functionStop(void){
+     printf("\n***********function stop*****************\n\n");
+}
+

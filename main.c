@@ -2,26 +2,9 @@
 #include "myipc.h"
 #include "mygame.h"
 #include <termios.h>
-void help(myCase *Cases)
-{
-     myCase *x=Cases;
-     for(; x->id >= 0; x++){
-         printf("  %d : %s\n",x->id, x->help);
-     }
-
-     return;
-}
 
 /************************************************************************************/
 // test function define in here
-
-void functionStart(void){
-     printf("***********function start*****************\n");
-}
-
-void functionStop(void){
-     printf("***********function stop*****************\n");
-}
 
 void invertString(void){
      char string[20];
@@ -277,7 +260,7 @@ void ipc_practice(void){
 	pthread_t thread;
 	while(1){
 		found = FALSE;
-		help(ipcCases);
+		myCasehelp(ipcCases);
 		printf("Enter IPC test case:");
 		scanf("%d", &example);
 
@@ -320,14 +303,21 @@ myCase testCases[] = {
   {-1, "the last item for test code.", NULL},
 };
 
+myGroup myGroups[] = {
+  {1,	"basic", 	"basic programming concept.", testCases},
+  {2,	"IPC", 		"inter-process communication example.", ipcCases},
+  {-1,	"", 		"", NULL},	//last
+};
+
 int main(int argc, char** argv)
 {
+#if 0
     int example=-1;
     char* input[20];    
     myCase *x=NULL;
 
     while(1){
-        help(testCases);
+        myCasehelp(testCases);
 	printf("Enter Main test case:");
         scanf("%d", &example);
         
@@ -344,7 +334,28 @@ int main(int argc, char** argv)
          }
         } 
     }  
+#else
+	int id=-1;
+	myCase *cur_cases=NULL;
+	while(1){
+		//dump group info
+		dumpGroup(myGroups);
+		printf("Select Group:");
+		scanf("%d", &id);
+		if(NULL==(cur_cases=getCases(myGroups,id))){
+			printf("Error Group id, please try again.\n");
+			continue;
+		}
 
+		//dump cases info
+		myCasehelp(cur_cases);
+		printf("Select Case:");
+		scanf("%d", &id);
+		if(FALSE==callFunction(cur_cases, id)){
+			printf("Error Case id.\n");
+		}
+	}
+#endif
 stop:
     return 1;
 }
