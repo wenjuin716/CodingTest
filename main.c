@@ -57,48 +57,6 @@ void variableSize(void){
 }
 
 #if 1
-void addList(mySlist** list){
-	char prefix[10] = "name_";
-	if(*list == NULL){
-		/* the first entry of list */
-		*list = (mySlist*) malloc(sizeof(mySlist));
-		// init linked list
-                sprintf( (*list)->name, "%s1", prefix);
-		(*list)->next = NULL;
-	}else{
-		//find the last entry
-		mySlist *tmp=NULL;
-		int count=0;
-		for(tmp = *list; tmp != NULL; tmp = tmp->next){
-			++count;
-			if(tmp->next == NULL)
-				break;
-		}
-		
-		tmp->next = (mySlist*) malloc(sizeof(mySlist));
-                sprintf( (tmp->next)->name, "%s%d", prefix, count+1);
-                (tmp->next)->next = NULL;
-	}
-}
-
-void dumplist(mySlist *list){
-	mySlist *tmp = list;
-	int count=0;
-	for(;tmp != NULL; tmp=tmp->next){
-		printf("Entry[%d]:%s\n", ++count, tmp->name);
-	}
-}
-
-void purchList(mySlist** list){
-	mySlist *tmp=NULL;
-	for(;(*list) != NULL;){
-		tmp = (*list);
-		(*list) = (*list)->next;
-		printf("free %s.\n", tmp->name);
-		free(tmp);
-	}
-}
-
 void invertList(mySlist** list){
 	mySlist *cur=NULL;
 	mySlist *pre=NULL;
@@ -118,11 +76,16 @@ void invertList(mySlist** list){
 void invertSinglelist(void){
 	mySlist* head=NULL;
 	unsigned int number=0;
+	char name[20]={0};
 	int x=0;
 	printf("Initial single linked list, Enter list number(must large than 0):");
 	scanf("%d", &number);
-	for(x=0; x<number; x++)
-		addList(&head);
+	for(x=0; x<number; x++){
+		memset(name, 0, sizeof(name));
+		printf("Enter %dth's name:", x+1);
+		scanf("%s", name);
+		addList(&head, name, NULL);
+	}
 
 	dumplist(head);
 

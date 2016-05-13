@@ -2,7 +2,7 @@ DIR=$(shell pwd)
 
 CC=gcc
 CFLAGS=
-OBJS=myipc.o mygame.o
+OBJS=common.o myipc.o mygame.o
 EXE=TestProgram
 
 all: main.o

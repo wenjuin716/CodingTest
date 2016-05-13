@@ -11,7 +11,13 @@ typedef struct testCase {
       void (*function)();
 } myCase;
 
+
 typedef struct singleLinkedList {
         char name[20];
+	char descript[128];
         struct singleLinkedList *next;
 } mySlist;
+
+void addList(mySlist** list, char *name, char *descript);
+void dumplist(mySlist *list);
+void purchList(mySlist** list);
