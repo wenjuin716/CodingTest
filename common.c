@@ -28,8 +28,6 @@ int callFunction(myCase *Cases,int id){
 				tmp->function();
 				functionStop();
 
-				//it need PAUSE twice, because the exute time to fast. 
-				PAUSE
 				PAUSE
 			}
 			break;
@@ -99,6 +97,9 @@ void dumplist(mySlist *list){
 	for(;tmp != NULL; tmp=tmp->next){
 		printf("Entry[%d]:%s\n", ++count, tmp->name);
 	}
+
+	if(count==0)
+		printf("empty link list.\n");
 }
 
 void purchList(mySlist** list){
@@ -111,11 +112,58 @@ void purchList(mySlist** list){
 	}
 }
 
+void reverseList(mySlist** list){
+	mySlist *cur=NULL;
+	mySlist *pre=NULL;
+
+	cur = (*list);
+	while(cur != NULL){
+		cur = cur->next;
+		(*list)->next = pre;
+		pre=(*list);
+		if(cur != NULL)
+			(*list)=cur;
+	}
+}
+
+void delByName(mySlist** list, const char* name){
+	mySlist *pre=NULL;
+	mySlist *cur=(*list);
+
+	int found=FALSE;
+	while(cur != NULL){
+		found=FALSE;	//init it
+		if(0 == strncmp(cur->name, name, sizeof(cur->name))){
+			found=TRUE;
+
+			//found target entry, delete it
+			if(pre == NULL){
+				// target entry is first entry
+				(*list) = (*list)->next;	//assign list head to second entry
+				free(cur);
+				cur=(*list);	//next entry is list(second entry)
+			}else{
+				pre->next=cur->next;
+				free(cur);
+				cur=pre->next;	//next entry is pre->next
+			}
+
+			/* it should have same name entry, 
+			** so we don't break it, and keep search it
+			*/
+		}else{
+			//not found
+			pre=cur;
+			cur=cur->next;
+		}
+	}
+}
 
 /************************************************************************************/
 //other help common function
 void functionStart(void){
-     printf("\n***********function start*****************\n");
+	fgetc(stdin);	//ignore the first input
+	printf("\n***********function start*****************\n");
 }
 
 void functionStop(void){

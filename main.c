@@ -6,14 +6,15 @@
 // cases definition 
 myCase basicCases[] = {
   {0, "Exit basicCases program.", NULL},
-  {1, "variable size concept.", variableSize},
+  {1, "variable size concept.", variableSizeConcept},
   {2, "Reverse String Case.", invertString},
-  {3, "Invert Single linked list.", invertSinglelist},
+  {3, "Invert Single linked list.", linklist},
   {4, "Sort a list of number.", bubbleSort},
   {5, "Operater sample.", oper},
   {6, "Fibonacci series.", fibSeries},
   {7, "array vs pointer operator.", arrayAndPointer},
   {8, "bitmap and offset pratice.", bitmapPractice},
+  {9, "MACRO Concept.", macroConcept},
   {-1, "the last item for test code.", NULL},
 };
 
@@ -55,8 +56,6 @@ int main(int argc, char** argv)
 			continue;
 		}else if(NULL==(cur_cases=getCases(myGroups,id))){
 			printf("Error Group id, please try again.\n");
-			//it need PAUSE twice, because the exute time to fast. 
-			PAUSE
 			PAUSE
 			continue;
 		}
@@ -70,8 +69,6 @@ int main(int argc, char** argv)
 				break;
 			}else if(FALSE==callFunction(cur_cases, id)){
 				printf("Error Case id.\n");
-				//it need PAUSE twice, because the exute time to fast. 
-				PAUSE
 				PAUSE
 				continue;
 			}

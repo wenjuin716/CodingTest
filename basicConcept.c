@@ -1,36 +1,65 @@
 #include "basicConcept.h"
 
-void variableSize(void){
-    char *ptr;
-    printf("char: %d bytes.\n", (int)sizeof(char));
-    printf("int: %d bytes.\n", (int)sizeof(int));
-    printf("long: %d bytes.\n", (int)sizeof(long));
-    printf("float: %d bytes.\n", (int)sizeof(float));
-    printf("double: %d bytes.\n", (int)sizeof(double));
-    printf("unsigned int: %d bytes.\n", (int)sizeof(unsigned int));
-    printf("char pointer size(char *ptr): %d bytes.\n", (int)sizeof(*ptr));
-    printf("pointer size(ptr): %d bytes.\n", (int)sizeof(ptr));
+void macroConcept(void){
+	printf("#define SQUARE(x) (x*x)\n");
+	printf("#define SQUARE2(x) ((x)*(x))\n");
+	printf("Q1:SQUARE(3+4)=%d\n",SQUARE(3+4));
+	printf("Q2:SQUARE2(3+4)=%d\n",SQUARE2(3+4));
+}
+
+void variableSizeConcept(void){
+	char charArray[10]="string";
+	int intArray[10]={1,2,3,4,5,6,7,8,9,10};
+	char *charPtr=NULL;
+	int *intPtr=NULL;
+	
+	printf("Basic variable size:\n");
+	printf("\t[Character]sizeof(char)= %d bytes.\n", (int)sizeof(char));
+	printf("\t"ANSI_COLOR_RED"[Integer]"ANSI_COLOR_RESET"sizeof(short)= %d bytes.\n", (int)sizeof(short));
+	printf("\t"ANSI_COLOR_RED"[Integer]"ANSI_COLOR_RESET"sizeof(int)= %d bytes.\n", (int)sizeof(int));
+	printf("\t"ANSI_COLOR_RED"[Integer]"ANSI_COLOR_RESET"sizeof(long)= %d bytes.\n", (int)sizeof(long));
+	printf("\t"ANSI_COLOR_RED"[Integer]"ANSI_COLOR_RESET"sizeof(unsigned int)= %d bytes.\n", (int)sizeof(unsigned int));
+	printf("\t[Float]sizeof(float)= %d bytes.\n", (int)sizeof(float));
+	printf("\t[Float]sizeof(double)= %d bytes.\n", (int)sizeof(double));
+
+	printf("\n\nBasic array size:\n");
+	printf("char charArray[10]=\"string\";\n");
+	printf("int intArray[10]={1,2,3,4,5,6,7,8,9,10};\n");
+	printf("\tsizeof("ANSI_COLOR_RED"charArray"ANSI_COLOR_RESET")= %d bytes.\n", (int)sizeof(charArray));
+	printf("\tsizeof("ANSI_COLOR_RED"charArray[0]"ANSI_COLOR_RESET")= %d bytes.\n", (int)sizeof(charArray[0]));
+	printf("\tstrlen("ANSI_COLOR_RED"charArray"ANSI_COLOR_RESET")= %d.\n", strlen(charArray));
+	printf("\tsizeof(intArray)= %d bytes.\n", (int)sizeof(intArray));
+	printf("\tsizeof(intArray[0])= %d bytes.\n", (int)sizeof(intArray[0]));
+
+	printf("\n\nBasic pointer size:\n");
+	printf("char *charPtr=charArray;\n");
+	printf("int *intPtr=intArray;\n");
+	printf("\tsizeof("ANSI_COLOR_RED"*charPtr"ANSI_COLOR_RESET")= %d bytes.\n", (int)sizeof(*charPtr));
+	printf("\tsizeof("ANSI_COLOR_RED"charPtr"ANSI_COLOR_RESET")= %d bytes.\n", (int)sizeof(charPtr));
+	printf("\tsizeof(*intPtr)= %d bytes.\n", (int)sizeof(*intPtr));
+	printf("\tsizeof(intPtr)= %d bytes.\n", (int)sizeof(intPtr));
 }
 
 void invertString(void){
-     char string[20];
-     printf("Invert String Case, Enter String(Max 20 char):");
-     scanf("%s",string);     // warning: unsafe (see fgets instead) 
+	char string[20];
+	//fgetc(stdin);	//ingore the first stdin
+	printf("Enter String(Max 20 char):");
+	gets(string);	//waiting user type string
 
-     int length = strlen(string);
+	int length = strlen(string);
 
-     int i=0;
-     //char* tmp = new char[length];
-     char* tmp = (char*) malloc(length);
-     for(i=0; i<=length; i++)
-          tmp[i]=string[length-1-i];
+	int i=0;
+	//char* tmp = new char[length];
+	char* tmp = (char*) malloc(length);
+	for(i=0; i<=length; i++)
+	  tmp[i]=string[length-1-i];
 
-     for(i=0; i<length; i++)
-          string[i]=tmp[i];
+	for(i=0; i<length; i++)
+	  string[i]=tmp[i];
 
-     printf("Invert String = %s\n",string);    
-     //delete tmp;
-     free(tmp);
+	printf("Reverse String is %s\n",string);    
+	//delete tmp;
+	free(tmp);
 }
 
 #if 1
@@ -196,44 +225,65 @@ void bitmapPractice(void){
 #endif
 
 #if 1
-void invertList(mySlist** list){
-	mySlist *cur=NULL;
-	mySlist *pre=NULL;
-
-	printf("invert list start\n");
-	cur = (*list);
-	while(cur != NULL){
-		cur = cur->next;
-		(*list)->next = pre;
-		pre=(*list);
-		if(cur != NULL)
-			(*list)=cur;
-	}
-	printf("invert finish.\n");
+void sListUsage(void){
+	system("clear");
+	printf("################ link list method ###################\n");
+	printf(" 0:Exit the program.\n");
+	printf(" 1:add a new entry to link list\n");
+	printf(" 2:delet entry by name.(not implement)\n");
+	printf(" 3:dump list info.\n");
+	printf(" 4:reverse the link list.\n");
+	printf(" 5:purch link list.\n");
+	printf("###############################################\n");
 }
 
-void invertSinglelist(void){
+void linklist(void){
 	mySlist* head=NULL;
-	unsigned int number=0;
+	int running=TRUE;
 	char name[20]={0};
-	int x=0;
-	printf("Initial single linked list, Enter list number(must large than 0):");
-	scanf("%d", &number);
-	for(x=0; x<number; x++){
-		memset(name, 0, sizeof(name));
-		printf("Enter %dth's name:", x+1);
-		scanf("%s", name);
-		addList(&head, name, NULL);
-	}
+	int id=0;
+	
+	do{
+		sListUsage();
+		printf("Enter your interesting case:");
+		scanf("%d", &id);
+		switch(id){
+		case 0:
+			purchList(&head);
+			running = FALSE;
+			break;
+		case 1:
+			// add a new entry to last one
+			memset(name, 0, sizeof(name));
+			printf("Enter new entry name:");
+			scanf("%s", name);
+			addList(&head, name, NULL);
+			break;
+		case 2:
+			memset(name, 0, sizeof(name));
+			printf("Enter delete entry name:");
+			scanf("%s", name);
+			delByName(&head, name);
+			break;
+		case 3:
+			dumplist(head);
+			fgetc(stdin);	//clear stdin
+			PAUSE
+			break;
+		case 4:
+			/* invert single linked list */
+			reverseList(&head);
+			break;
+		case 5:
+			purchList(&head);
+			break;
+		default:
+			printf(ANSI_COLOR_RED"Wrong case.\n"ANSI_COLOR_RESET);
+			break;
+		}
+	}while(running);
 
-	dumplist(head);
-
-	/* invert single linked list */
-	invertList(&head);	
-	dumplist(head);
-
-	purchList(&head);
-	dumplist(head);
+	fgetc(stdin);	//clear stdin
 	return;
 }
 #endif

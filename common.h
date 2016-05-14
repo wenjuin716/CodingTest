@@ -15,6 +15,8 @@
 
 #define PAUSE printf("Press Enter key to continue..."); fgetc(stdin);
 
+#define DEBUG printf("[Common Debug]%s:%d\n",__FILE__, __LINE__);fgetc(stdin);
+
 typedef struct singleLinkedList mySlist;
 typedef struct myGroup myGroup;
 typedef struct myCase myCase;
@@ -28,6 +30,8 @@ myCase* getCases(myGroup *group,int id);
 void addList(mySlist** list, char *name, char *descript);
 void dumplist(mySlist *list);
 void purchList(mySlist** list);
+void reverseList(mySlist** list);
+void delByName(mySlist** list, const char* name);
 
 /************************************************************************************/
 //other help common function
