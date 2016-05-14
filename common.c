@@ -5,9 +5,10 @@
 void myCasehelp(myCase *Cases)
 {
 	myCase *tmp=Cases;
+	system("clear");	//clear cmd window
 	printf("##################Case Help ###################\n");
 	for(; tmp->id >= 0; tmp++){
-		printf("  %d : %s\n",tmp->id, tmp->help);
+		printf(ANSI_COLOR_BLUE"  %d : %s\n"ANSI_COLOR_RESET,tmp->id, tmp->help);
 	}
 	printf("###############################################\n");
 
@@ -19,11 +20,18 @@ int callFunction(myCase *Cases,int id){
 	myCase *tmp=NULL;
 	for(tmp = Cases; tmp->id >= 0; tmp++){
 		if(id == tmp->id){
-			printf("  %d : %s\n",tmp->id, tmp->help);
-			ret=TRUE;
-			functionStart();
-			tmp->function();
-			functionStop();
+			if(NULL != tmp->function){
+				system("clear");	//clear cmd window
+				printf("Excute case %d : %s\n",tmp->id, tmp->help);
+				ret=TRUE;
+				functionStart();
+				tmp->function();
+				functionStop();
+
+				//it need PAUSE twice, because the exute time to fast. 
+				PAUSE
+				PAUSE
+			}
 			break;
 		}
 	}	
@@ -35,9 +43,10 @@ int callFunction(myCase *Cases,int id){
 //myGroup common function
 void dumpGroup(myGroup *group){
 	myGroup *tmp = group;
+	system("clear");	//clear cmd window
 	printf("################ Group Info ###################\n");
 	for(tmp = group; tmp->cases != NULL; tmp++){
-		printf("[%d]%s : %s\n", tmp->id, tmp->name, tmp->descript);
+		printf(ANSI_COLOR_BLUE"[%d]%s : %s\n"ANSI_COLOR_RESET, tmp->id, tmp->name, tmp->descript);
 	}
 	printf("###############################################\n");
 }
@@ -106,10 +115,10 @@ void purchList(mySlist** list){
 /************************************************************************************/
 //other help common function
 void functionStart(void){
-     printf("\n\n***********function start*****************\n");
+     printf("\n***********function start*****************\n");
 }
 
 void functionStop(void){
-     printf("\n***********function stop*****************\n\n");
+     printf("***********function stop*****************\n");
 }
 

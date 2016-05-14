@@ -5,43 +5,57 @@
 #define TRUE 1
 #define FALSE 0
 
-/************************************************************************************/
-//myCase common function
-typedef struct myCase {
-      int id;
-      char help[50];
-      void (*function)();
-} myCase;
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_YELLOW  "\x1b[33m"
+#define ANSI_COLOR_BLUE    "\x1b[34m"
+#define ANSI_COLOR_MAGENTA "\x1b[35m"
+#define ANSI_COLOR_CYAN    "\x1b[36m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
+
+#define PAUSE printf("Press Enter key to continue..."); fgetc(stdin);
+
+typedef struct singleLinkedList mySlist;
+typedef struct myGroup myGroup;
+typedef struct myCase myCase;
 
 void myCasehelp(myCase *Cases);
 int callFunction(myCase *Cases,int id);
 
-/************************************************************************************/
-//myGroup common function
-typedef struct myGroup {
-	int id;
-        char name[20];
-	char descript[128];
-        myCase* cases;
-} myGroup;
-
 void dumpGroup(myGroup *group);
 myCase* getCases(myGroup *group,int id);
-
-/************************************************************************************/
-//mySlist common function
-typedef struct singleLinkedList {
-        char name[20];
-	char descript[128];
-        struct singleLinkedList *next;
-} mySlist;
 
 void addList(mySlist** list, char *name, char *descript);
 void dumplist(mySlist *list);
 void purchList(mySlist** list);
 
-
 /************************************************************************************/
 //other help common function
 void functionStart(void);
 void functionStop(void);
+#ifndef COMMON_H	//those struct can't be included twice, So we should protect it by macro 
+/************************************************************************************/
+//myCase common function
+struct myCase {
+      int id;
+      char help[50];
+      void (*function)();
+};
+
+/************************************************************************************/
+//myGroup common function
+struct myGroup {
+	int id;
+        char name[20];
+	char descript[128];
+        myCase* cases;
+};
+
+/************************************************************************************/
+//mySlist common function
+struct singleLinkedList {
+        char name[20];
+	char descript[128];
+        struct singleLinkedList *next;
+};
+#endif	//COMMON_H
