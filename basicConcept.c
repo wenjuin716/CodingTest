@@ -10,6 +10,7 @@ void macroConcept(void){
 void variableSizeConcept(void){
 	char charArray[10]="string";
 	int intArray[10]={1,2,3,4,5,6,7,8,9,10};
+	int Array[5][10];
 	char *charPtr=NULL;
 	int *intPtr=NULL;
 	
@@ -25,11 +26,15 @@ void variableSizeConcept(void){
 	printf("\n\nBasic array size:\n");
 	printf("char charArray[10]=\"string\";\n");
 	printf("int intArray[10]={1,2,3,4,5,6,7,8,9,10};\n");
+	printf("int Array[5][10];\n");
 	printf("\tsizeof("ANSI_COLOR_RED"charArray"ANSI_COLOR_RESET")= %d bytes.\n", (int)sizeof(charArray));
 	printf("\tsizeof("ANSI_COLOR_RED"charArray[0]"ANSI_COLOR_RESET")= %d bytes.\n", (int)sizeof(charArray[0]));
 	printf("\tstrlen("ANSI_COLOR_RED"charArray"ANSI_COLOR_RESET")= %d.\n", strlen(charArray));
 	printf("\tsizeof(intArray)= %d bytes.\n", (int)sizeof(intArray));
 	printf("\tsizeof(intArray[0])= %d bytes.\n", (int)sizeof(intArray[0]));
+	printf("\tsizeof(Array)= %d bytes.\n", sizeof(Array));
+        printf("\tsizeof(Array[3])= %d bytes.\n", sizeof(Array[3]));
+        printf("\tsizeof(Array[3][5])= %d bytes.\n", sizeof(Array[3][5]));
 
 	printf("\n\nBasic pointer size:\n");
 	printf("char *charPtr=charArray;\n");
