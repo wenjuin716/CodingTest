@@ -1,5 +1,40 @@
 #include "basicConcept.h"
 
+/* 
+ *  this function show the int/float variable calculation.
+ */
+void varCalConcept(void){
+    int int_1=11, int_2=10;
+    float float_1=11, float_2=10;
+    
+    printf("int int_1=11, int_2=10;\n");
+    printf("float float_1=11, float_2=10;\n");
+    
+    printf("(int_1-int_2)/2=%f\n",(int_1-int_2)/2);
+    printf("(float)((int_1-int_2)/2)=%f\n",(float)((int_1-int_2)/2));
+    printf("((float)(int_1-int_2)/2)=%f\n",((float)(int_1-int_2)/2));    
+
+    printf("(float_1-float_2)/2=%f\n",(float_1-float_2)/2);
+    printf("(float_1-float_2)/2=%f\n",((float_1-float_2)/2));
+
+    printf("Int round:\n");
+    printf("IntRound(1.46)=%d\n", IntRound(1.49));
+    printf("IntRound(-1.49)=%d\n", IntRound(-1.49));    
+    printf("IntRound(2.5)=%d\n", IntRound(2.5));
+    printf("IntRound(-2.5)=%d\n", IntRound(-2.5));
+    printf("IntRound(3.51)=%d\n", IntRound(3.51));
+    printf("IntRound(-3.51)=%d\n", IntRound(-3.51));
+}
+
+int IntRound(double dInput)
+{
+    if(dInput >= 0.0f)
+    {
+        return ((int)(dInput + 0.5f));
+    }
+    return ((int)(dInput - 0.5f));
+}
+
 void macroConcept(void){
 	printf("#define SQUARE(x) (x*x)\n");
 	printf("#define SQUARE2(x) ((x)*(x))\n");

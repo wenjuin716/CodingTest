@@ -15,6 +15,7 @@ myCase basicCases[] = {
   {7, "array vs pointer operator.", arrayAndPointer},
   {8, "bitmap and offset pratice.", bitmapPractice},
   {9, "MACRO Concept.", macroConcept},
+  {10, "Variable calculation Concept.", varCalConcept},  
   {-1, "the last item for test code.", NULL},
 };
 

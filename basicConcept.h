@@ -3,6 +3,8 @@
 #include "common.h"
 #define	COMMON_H
 
+void varCalConcept(void);
+int IntRound(double dInput);
 void variableSizeConcept(void);
 void invertString(void);
 void bubbleSort(void);
